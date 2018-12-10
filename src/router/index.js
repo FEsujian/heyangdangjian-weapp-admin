@@ -76,9 +76,9 @@ export const constantRouterMap = [{
         }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
+        path: 'survey',
+        name: 'Survey',
+        component: () => import('@/views/survey/index'),
         meta: {
           title: '党建概况',
           icon: 'gaikuo'
@@ -187,9 +187,9 @@ export const constantRouterMap = [{
         icon: 'yijianfankui'
       }
     }, {
-      path: 'menu1',
-      component: () => import('@/views/nested/menu1/index'), // Parent router-view
-      name: 'Menu1',
+      path: 'modifyPass',
+      component: () => import('@/views/modifyPass/index'), // Parent router-view
+      name: 'ModifyPass',
       meta: {
         title: '修改密码',
         icon: 'xiugaimima'

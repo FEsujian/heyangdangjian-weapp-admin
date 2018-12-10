@@ -21,7 +21,8 @@ import Layout from '../views/layout/Layout';
     icon: 'svg-name'             the icon show in the sidebar,
   }
 **/
-export const constantRouterMap = [{
+export const constantRouterMap = [
+  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
@@ -42,10 +43,12 @@ export const constantRouterMap = [{
     redirect: '/dashboard',
     name: 'Dashboard',
     hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
-    }]
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index')
+      }
+    ]
   },
 
   {
@@ -57,7 +60,8 @@ export const constantRouterMap = [{
       title: '首页配置',
       icon: 'index'
     },
-    children: [{
+    children: [
+      {
         path: 'banner',
         name: 'Banner',
         component: () => import('@/views/banner/index'),
@@ -85,9 +89,9 @@ export const constantRouterMap = [{
         }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
+        path: 'dynamic',
+        name: 'Dynamic',
+        component: () => import('@/views/dynamic/index'),
         meta: {
           title: '合阳动态',
           icon: 'dongtai'
@@ -95,18 +99,18 @@ export const constantRouterMap = [{
       },
 
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
+        path: 'partyNews',
+        name: 'partyNews',
+        component: () => import('@/views/partyNews/index'),
         meta: {
           title: '党建要闻',
           icon: 'yaowen'
         }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
+        path: 'partyActivity',
+        name: 'partyActivity',
+        component: () => import('@/views/partyActivity/index'),
         meta: {
           title: '党建活动',
           icon: 'huodong'
@@ -123,7 +127,8 @@ export const constantRouterMap = [{
       title: '学习园地',
       icon: 'xuexiyuandi'
     },
-    children: [{
+    children: [
+      {
         path: 'menu1',
         component: () => import('@/views/nested/menu1/index'), // Parent router-view
         name: 'Menu1',
@@ -133,18 +138,18 @@ export const constantRouterMap = [{
         }
       },
       {
-        path: 'menu1-3',
-        component: () => import('@/views/nested/menu1/menu1-3'),
-        name: 'Menu1-3',
+        path: 'menu1-1',
+        component: () => import('@/views/nested/menu1/menu1-1'),
+        name: 'Menu1-1',
         meta: {
           title: '公开课',
           icon: 'gongkaike'
         }
       },
       {
-        path: 'menu1-3',
-        component: () => import('@/views/nested/menu1/menu1-3'),
-        name: 'Menu1-3',
+        path: 'menu1-2',
+        component: () => import('@/views/nested/menu1/menu1-2'),
+        name: 'Menu1-2',
         meta: {
           title: '在线考试',
           icon: 'zaixiankaoshi'
@@ -170,31 +175,35 @@ export const constantRouterMap = [{
       title: '系统设置',
       icon: 'xitongshezhi'
     },
-    children: [{
-      path: 'menu1',
-      component: () => import('@/views/nested/menu1/index'), // Parent router-view
-      name: 'Menu1',
-      meta: {
-        title: '用户查看',
-        icon: 'yonghuchakan'
+    children: [
+      {
+        path: 'user',
+        component: () => import('@/views/user/index'), // Parent router-view
+        name: 'user',
+        meta: {
+          title: '用户查看',
+          icon: 'yonghuchakan'
+        }
+      },
+      {
+        path: 'opinion',
+        component: () => import('@/views/opinion/index'), // Parent router-view
+        name: 'opinion',
+        meta: {
+          title: '意见反馈',
+          icon: 'yijianfankui'
+        }
+      },
+      {
+        path: 'modifyPass',
+        component: () => import('@/views/modifyPass/index'), // Parent router-view
+        name: 'ModifyPass',
+        meta: {
+          title: '修改密码',
+          icon: 'xiugaimima'
+        }
       }
-    }, {
-      path: 'menu1',
-      component: () => import('@/views/nested/menu1/index'), // Parent router-view
-      name: 'Menu1',
-      meta: {
-        title: '意见反馈',
-        icon: 'yijianfankui'
-      }
-    }, {
-      path: 'modifyPass',
-      component: () => import('@/views/modifyPass/index'), // Parent router-view
-      name: 'ModifyPass',
-      meta: {
-        title: '修改密码',
-        icon: 'xiugaimima'
-      }
-    }]
+    ]
   }
 ];
 

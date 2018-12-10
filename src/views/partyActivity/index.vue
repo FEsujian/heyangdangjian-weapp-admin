@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-button type="primary" size="small">新增公开课</el-button>
+    <el-button type="primary" size="small">新增活动</el-button>
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -15,11 +15,6 @@
       </el-table-column>
       <el-table-column label="标题" width="300">
         <template slot-scope="scope">{{ scope.row.title }}</template>
-      </el-table-column>
-      <el-table-column label="公开课地地址">
-        <template slot-scope="scope">
-          <span>{{ scope.row.url }}</span>
-        </template>
       </el-table-column>
       <el-table-column label="内容">
         <template slot-scope="scope">
@@ -51,20 +46,17 @@ export default {
         {
           content: "content",
           display_time: "1988-07-24 10:43:55",
-          title: "标题",
-          url: "www.baidu.com"
+          title: "标题"
         },
         {
           content: "content",
           display_time: "1988-07-24 10:43:55",
-          title: "标题",
-          url: "www.baidu.com"
+          title: "标题"
         },
         {
           content: "content",
           display_time: "1988-07-24 10:43:55",
-          title: "标题",
-          url: "www.baidu.com"
+          title: "标题"
         }
       ]
     };

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container" style="text-align:center">
-    <tinymce :height="300" v-model="content"/>
+    <tinymce :height="600" v-model="content"/>
     <el-button type="primary" style="margin:10px;">保 存</el-button>
   </div>
 </template>

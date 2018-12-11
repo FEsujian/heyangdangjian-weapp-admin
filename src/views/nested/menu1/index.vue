@@ -34,7 +34,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog title="新增党章党规" :visible.sync="dialogVisible" width="30%">
+    <el-dialog :visible.sync="dialogVisible" title="新增党章党规" width="30%">
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="标题">
           <el-input v-model="form.name" placeholder="请输入标题"></el-input>
@@ -43,7 +43,7 @@
           <el-date-picker v-model="time" type="date" placeholder="选择日期"></el-date-picker>
         </el-form-item>
         <el-form-item label="内容">
-          <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="form.content"></el-input>
+          <el-input v-model="form.content" :rows="2" type="textarea" placeholder="请输入内容"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSubmit">确定</el-button>

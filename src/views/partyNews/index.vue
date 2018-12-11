@@ -10,11 +10,19 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="动态ID" width="95">
+      <el-table-column align="center" label="文章ID" width="95">
         <template slot-scope="scope">{{ scope.$index }}</template>
       </el-table-column>
-      <el-table-column label="标题" width="300">
+      <el-table-column label="标题" width="200">
         <template slot-scope="scope">{{ scope.row.title }}</template>
+      </el-table-column>
+      <el-table-column label="副标题" width="200">
+        <template slot-scope="scope">{{ scope.row.title }}</template>
+      </el-table-column>
+      <el-table-column label="缩略图" width="120">
+        <template slot-scope="scope">
+          <img :src="scope.row.imgUrl" style="width:100px;height:70px;">
+        </template>
       </el-table-column>
       <el-table-column label="内容">
         <template slot-scope="scope">
@@ -64,19 +72,25 @@ export default {
       form: {},
       list: [
         {
-          content: "content",
+          content: `"金色名片"永不退色`,
           display_time: "1988-07-24 10:43:55",
-          title: "标题"
+          title: `"金色名片"永不退色`,
+          imgUrl:
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544505387359&di=34349441419325cabbe31609669278e6&imgtype=0&src=http%3A%2F%2Fwww.cnr.cn%2Fnewscenter%2Fspecial%2Fapec%2Fxianchang%2F20141111%2FW020141111393697650511.jpg"
         },
         {
-          content: "content",
+          content: `"金色名片"永不退色`,
           display_time: "1988-07-24 10:43:55",
-          title: "标题"
+          title: `"金色名片"永不退色`,
+          imgUrl:
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544505387359&di=34349441419325cabbe31609669278e6&imgtype=0&src=http%3A%2F%2Fwww.cnr.cn%2Fnewscenter%2Fspecial%2Fapec%2Fxianchang%2F20141111%2FW020141111393697650511.jpg"
         },
         {
-          content: "content",
+          content: `"金色名片"永不退色`,
           display_time: "1988-07-24 10:43:55",
-          title: "标题"
+          title: `"金色名片"永不退色`,
+          imgUrl:
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1544505387359&di=34349441419325cabbe31609669278e6&imgtype=0&src=http%3A%2F%2Fwww.cnr.cn%2Fnewscenter%2Fspecial%2Fapec%2Fxianchang%2F20141111%2FW020141111393697650511.jpg"
         }
       ]
     };

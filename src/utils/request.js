@@ -1,12 +1,18 @@
 import axios from 'axios'
-import { Message, MessageBox } from 'element-ui'
+import {
+  Message,
+  MessageBox
+} from 'element-ui'
 import store from '../store'
-import { getToken } from '@/utils/auth'
-
+import {
+  getToken
+} from '@/utils/auth'
+// axios发送请求携带cookie
+axios.defaults.withCredentials = true;
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // api 的 base_url
-  timeout: 5000 // 请求超时时间
+  timeout: 30000 // 请求超时时间
 })
 
 // request拦截器
@@ -31,7 +37,8 @@ service.interceptors.response.use(
      * code为非20000是抛错 可结合自己业务进行修改
      */
     const res = response.data
-    if (res.code !== 20000) {
+    console.log(res.code)
+    if (res.code !== 200) {
       Message({
         message: res.message,
         type: 'error',
@@ -42,8 +49,7 @@ service.interceptors.response.use(
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
         MessageBox.confirm(
           '你已被登出，可以取消继续留在该页面，或者重新登录',
-          '确定登出',
-          {
+          '确定登出', {
             confirmButtonText: '重新登录',
             cancelButtonText: '取消',
             type: 'warning'
@@ -56,7 +62,7 @@ service.interceptors.response.use(
       }
       return Promise.reject('error')
     } else {
-      return response.data
+      return response
     }
   },
   error => {

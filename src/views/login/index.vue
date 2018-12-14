@@ -45,10 +45,6 @@
           @click.native.prevent="handleLogin"
         >Sign in</el-button>
       </el-form-item>
-      <div class="tips">
-        <span style="margin-right:20px;">用户名: admin</span>
-        <span>密码: admin</span>
-      </div>
     </el-form>
   </div>
 </template>
@@ -112,6 +108,8 @@ export default {
           this.$store
             .dispatch("Login", this.loginForm)
             .then(() => {
+              console.log("成功了");
+              console.log(this.redirect);
               this.loading = false;
               this.$router.push({ path: this.redirect || "/" });
             })

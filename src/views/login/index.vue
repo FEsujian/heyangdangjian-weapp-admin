@@ -108,8 +108,6 @@ export default {
           this.$store
             .dispatch("Login", this.loginForm)
             .then(() => {
-              console.log("成功了");
-              console.log(this.redirect);
               this.loading = false;
               this.$router.push({ path: this.redirect || "/" });
             })

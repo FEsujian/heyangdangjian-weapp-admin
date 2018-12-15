@@ -115,9 +115,7 @@ export default {
       listLoading: false
     };
   },
-  created() {
-    this.fetchData();
-  },
+  created() {},
   mounted() {},
   methods: {}
 };

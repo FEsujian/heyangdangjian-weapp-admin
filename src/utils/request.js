@@ -8,7 +8,7 @@ import {
   getToken
 } from '@/utils/auth'
 // axios发送请求携带cookie
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // api 的 base_url
@@ -19,7 +19,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (store.getters.token) {
-      config.headers['X-Token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+      config.headers['Authorization'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
     }
     return config
   },
@@ -38,9 +38,9 @@ service.interceptors.response.use(
      */
     const res = response.data
     console.log(res.code)
-    if (res.code !== 200) {
+    if (res.code !== 20000) {
       Message({
-        message: res.message,
+        message: res.msg,
         type: 'error',
         duration: 5 * 1000
       })
@@ -62,7 +62,7 @@ service.interceptors.response.use(
       }
       return Promise.reject('error')
     } else {
-      return response
+      return response.data
     }
   },
   error => {

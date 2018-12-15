@@ -38,12 +38,11 @@ const user = {
       commit
     }, userInfo) {
       const username = userInfo.username.trim()
-      console.log(username)
       return new Promise((resolve, reject) => {
         login(username, userInfo.password).then(response => {
           const data = response.data
-          // setToken(data.token)
-          // commit('SET_TOKEN', data.token)
+          setToken('Bearer ' + data.token)
+          commit('SET_TOKEN', data.token)
           resolve()
         }).catch(error => {
           reject(error)
@@ -57,7 +56,7 @@ const user = {
       state
     }) {
       return new Promise((resolve, reject) => {
-        getInfo(state.token).then(response => {
+        getInfo().then(response => {
           const data = response.data
           if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
             commit('SET_ROLES', data.roles)

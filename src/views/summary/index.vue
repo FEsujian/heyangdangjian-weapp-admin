@@ -1,29 +1,39 @@
 <template>
   <div class="app-container" style="text-align:center">
-    <tinymce :height="600" v-model="content"/>
-    <el-button type="primary" style="margin:10px;">保 存</el-button>
+    <tinymce :height="600" v-model="data.content"/>
+    <el-button type="primary" style="margin:10px;" @click="updateArticleById">保 存</el-button>
   </div>
 </template>
 
 <script>
 import Tinymce from "@/components/Tinymce";
-import { findArticleById } from "@/api/article";
+import { findArticleById, updateArticleById } from "@/api/article";
 export default {
   components: {
     Tinymce
   },
   data() {
     return {
-      content: ``
+      data: {}
     };
   },
   created() {
-    findArticleById({ id: 1 }).then(res => {
-      console.log(res);
-    });
+    this.refreshData();
   },
   mounted() {},
-  methods: {}
+  methods: {
+    refreshData() {
+      findArticleById({ id: 1 }).then(res => {
+        this.data = res.data[0];
+      });
+    },
+    updateArticleById() {
+      updateArticleById({ data: this.data, id: 1 }).then(res => {
+        this.$message.success("保存成功");
+        this.refreshData();
+      });
+    }
+  }
 };
 </script>
 

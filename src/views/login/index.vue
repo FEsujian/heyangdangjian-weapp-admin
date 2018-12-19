@@ -18,7 +18,7 @@
           name="username"
           type="text"
           auto-complete="on"
-          placeholder="username"
+          placeholder="请输入用户名"
         />
       </el-form-item>
       <el-form-item prop="password">
@@ -30,7 +30,7 @@
           v-model="loginForm.password"
           name="password"
           auto-complete="on"
-          placeholder="password"
+          placeholder="请输入密码"
           @keyup.enter.native="handleLogin"
         />
         <span class="show-pwd" @click="showPwd">
@@ -43,7 +43,7 @@
           type="primary"
           style="width:100%;"
           @click.native.prevent="handleLogin"
-        >Sign in</el-button>
+        >登 录</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -71,8 +71,8 @@ export default {
     };
     return {
       loginForm: {
-        username: "admin",
-        password: "admin"
+        username: "",
+        password: ""
       },
       loginRules: {
         username: [
@@ -126,10 +126,26 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss">
 $bg: #2d3a4b;
-$light_gray: #eee;
+$light_gray: #fff;
 
 /* reset element-ui css */
 .login-container {
+  ::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #eee;
+  }
+  :-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #eee;
+  }
+  ::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #eee;
+  }
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #eee;
+  }
   .el-input {
     display: inline-block;
     height: 47px;
@@ -150,7 +166,7 @@ $light_gray: #eee;
   }
   .el-form-item {
     border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.12);
     border-radius: 5px;
     color: #454545;
   }
@@ -165,7 +181,7 @@ $light_gray: #eee;
   position: fixed;
   height: 100%;
   width: 100%;
-  background-color: $bg;
+  background: url("/static/image/background.jpg") no-repeat;
   .login-form {
     position: absolute;
     left: 0;
@@ -195,7 +211,7 @@ $light_gray: #eee;
   .title {
     font-size: 26px;
     font-weight: 400;
-    color: $light_gray;
+    color: #ff7362;
     margin: 0px auto 40px auto;
     text-align: center;
     font-weight: bold;

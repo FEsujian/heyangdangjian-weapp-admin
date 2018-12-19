@@ -7,3 +7,19 @@ export function findArticleById(params) {
     params
   })
 }
+
+export function findArticleByClassId(params) {
+  return request({
+    url: '/findArticleByClassId',
+    method: 'get',
+    params
+  })
+}
+
+export function updateArticleById(data) {
+  return request({
+    url: '/updateArticleById',
+    method: 'post',
+    data
+  })
+}

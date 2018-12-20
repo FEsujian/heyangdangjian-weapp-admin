@@ -21,8 +21,7 @@ import Layout from '../views/layout/Layout';
     icon: 'svg-name'             the icon show in the sidebar,
   }
 **/
-export const constantRouterMap = [
-  {
+export const constantRouterMap = [{
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
@@ -43,25 +42,22 @@ export const constantRouterMap = [
     redirect: '/dashboard',
     name: 'Dashboard',
     hidden: true,
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index')
-      }
-    ]
+    children: [{
+      path: 'dashboard',
+      component: () => import('@/views/dashboard/index')
+    }]
   },
 
   {
     path: '/indexConfig',
     component: Layout,
-    redirect: '/indexConfig/table',
+    redirect: '/indexConfig',
     name: 'indexConfig',
     meta: {
       title: '首页配置',
       icon: 'index'
     },
-    children: [
-      {
+    children: [{
         path: 'banner',
         name: 'Banner',
         component: () => import('@/views/banner/index'),
@@ -121,17 +117,15 @@ export const constantRouterMap = [
   {
     path: '/studySpace',
     component: Layout,
-    redirect: '/studySpace/menu1',
     name: 'studySpace',
     meta: {
       title: '学习园地',
       icon: 'xuexiyuandi'
     },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
+    children: [{
+        path: 'rules',
+        name: 'rules',
+        component: () => import('@/views/rules/index'), // Parent router-view
         meta: {
           title: '党章党规',
           icon: 'dangzhangdanggui'
@@ -175,8 +169,7 @@ export const constantRouterMap = [
       title: '系统设置',
       icon: 'xitongshezhi'
     },
-    children: [
-      {
+    children: [{
         path: 'user',
         component: () => import('@/views/user/index'), // Parent router-view
         name: 'user',

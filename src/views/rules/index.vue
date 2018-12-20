@@ -1,7 +1,8 @@
 <template>
   <div class="app-container">
-    <el-button type="primary" size="small" @click="dialogVisible = true">新增活动</el-button>
+    <el-button type="primary" size="small" @click="dialogVisible = true">新增党章党规</el-button>
     <el-table
+      v-loading="loading"
       :data="data"
       style="margin-top:10px;"
       element-loading-text="数据加载中..."
@@ -37,9 +38,19 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      :current-page="page"
+      :page-sizes="[10, 20, 50, 100]"
+      :page-size="pageSize"
+      :total="pageData.itemTotal"
+      style="text-align:right;margin-top:10px;"
+      layout="total, sizes, prev, pager, next, jumper"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    ></el-pagination>
 
     <!-- 新增文章 -->
-    <el-dialog :visible.sync="dialog.newArticle" title="新增动态" width="800px" center>
+    <el-dialog :visible.sync="dialog.newArticle" title="新增党章党规" width="800px" center>
       <Article :openType="'view'"></Article>
     </el-dialog>
     <!-- 查看文章 -->
@@ -68,7 +79,11 @@ export default {
         viewArticle: false
       },
       articleData: {},
-      data: []
+      data: [],
+      loading: false,
+      page: 1,
+      pageSize: 6,
+      pageData: {}
     };
   },
   created() {
@@ -81,10 +96,28 @@ export default {
       this.articleData = row;
       this.dialog.viewArticle = true;
     },
+    // 页面大小改变
+    handleSizeChange(val) {
+      this.page = 1;
+      this.pageSize = val;
+      this.refreshData();
+    },
+    // 页面改变
+    handleCurrentChange(val) {
+      this.page = val;
+      this.refreshData();
+    },
     refreshData() {
-      findArticleByClassId({ id: 5, page: 1, pageSize: 6 }).then(res => {
-        this.data = res.data;
-      });
+      this.loading = true;
+      findArticleByClassId({ id: 6, page: this.page, pageSize: this.pageSize })
+        .then(res => {
+          this.loading = false;
+          this.pageData = res;
+          this.data = res.data;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
     }
   }
 };

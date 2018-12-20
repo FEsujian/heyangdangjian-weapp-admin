@@ -15,7 +15,7 @@
       v-loading="listLoading"
       :data="list"
       style="margin-top:10px;"
-      element-loading-text="Loading"
+      element-loading-text="数据加载中..."
       border
       fit
       highlight-current-row

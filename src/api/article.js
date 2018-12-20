@@ -16,6 +16,14 @@ export function findArticleByClassId(params) {
   })
 }
 
+export function findClassById(params) {
+  return request({
+    url: '/findClassById',
+    method: 'get',
+    params
+  })
+}
+
 export function updateArticleById(data) {
   return request({
     url: '/updateArticleById',

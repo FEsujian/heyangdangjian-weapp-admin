@@ -1,9 +1,9 @@
 <template>
   <div :class="{fullscreen:fullscreen}" class="tinymce-container editor-container">
     <textarea :id="tinymceId" class="tinymce-textarea"/>
-    <div class="editor-custom-btn-container">
+    <!-- <div class="editor-custom-btn-container">
       <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK"/>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -65,13 +65,16 @@ export default {
     }
   },
   watch: {
-    value(val) {
-      if (!this.hasChange && this.hasInit) {
-        this.$nextTick(() =>
-          window.tinymce.get(this.tinymceId).setContent(val || "")
-        );
+    value: {
+      handler: function(val) {
+        if (this.hasInit) {
+          this.$nextTick(() => {
+            window.tinymce.get(this.tinymceId).setContent(val || "");
+          });
+        }
       }
     },
+
     language() {
       this.destroyTinymce();
       this.$nextTick(() => this.initTinymce());

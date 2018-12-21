@@ -57,7 +57,7 @@
     <el-dialog
       v-if="dialog.newArticle"
       :visible.sync="dialog.newArticle"
-      title="新增活动"
+      title="新增要闻"
       width="800px"
       center
     >
@@ -67,7 +67,7 @@
     <el-dialog
       v-if="dialog.modifyArticle"
       :visible.sync="dialog.modifyArticle"
-      title="修改活动"
+      title="修改要闻"
       width="800px"
       center
     >
@@ -108,6 +108,7 @@ export default {
         modifyArticle: false,
         viewArticle: false
       },
+      tabIndex: 0,
       classList: [],
       articleData: {},
       data: [],
@@ -127,12 +128,12 @@ export default {
       this.dialog.newArticle = false;
       this.dialog.modifyArticle = false;
       this.dialog.viewArticle = false;
-      this.refreshData();
+      this.refreshData(this.classList[this.tabIndex].id);
     },
     // 新建文章
     newArticle() {
       this.articleData = {
-        uid: 5,
+        uid: this.classList[this.tabIndex].id,
         title: "",
         abstract: "",
         content: "",
@@ -158,7 +159,7 @@ export default {
           deleteArticleById({ id })
             .then(res => {
               this.$message.success("删除成功");
-              this.refreshData();
+              this.refreshData(this.classList[this.tabIndex].id);
             })
             .catch(() => {
               this.$message.success("删除失败");
@@ -172,6 +173,7 @@ export default {
       this.dialog.viewArticle = true;
     },
     tabChange(val) {
+      this.tabIndex = val.index;
       this.refreshData(this.classList[val.index].id);
     },
     getClassList() {
@@ -183,12 +185,12 @@ export default {
     handleSizeChange(val) {
       this.page = 1;
       this.pageSize = val;
-      this.refreshData();
+      this.refreshData(this.classList[this.tabIndex].id);
     },
     // 页面改变
     handleCurrentChange(val) {
       this.page = val;
-      this.refreshData();
+      this.refreshData(this.classList[this.tabIndex].id);
     },
     refreshData(id) {
       this.loading = true;

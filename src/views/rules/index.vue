@@ -122,7 +122,7 @@ export default {
     // 新建文章
     newArticle() {
       this.articleData = {
-        uid: 5,
+        uid: 6,
         title: "",
         abstract: "",
         content: "",

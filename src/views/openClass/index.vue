@@ -1,8 +1,9 @@
 <template>
   <div class="app-container">
-    <!-- <el-button type="primary" size="small" @click="dialogVisible = true">新增要闻</el-button> -->
+    <!-- <el-button type="primary" size="small" @click="dialogVisible = true">新增公开课</el-button> -->
     <el-tabs type="border-card" stretch @tab-click="tabChange">
       <el-tab-pane v-for="classId in classList" :key="classId.id" :label="classId.className">
+        <el-button type="primary" size="small" @click="newArticle">新增公开课</el-button>
         <el-table
           v-loading="loading"
           :data="data"
@@ -35,8 +36,8 @@
           <el-table-column label="操作" width="250" align="center">
             <template slot-scope="scope">
               <el-button type="success" size="small" @click="viewArticle(scope.row)">查看</el-button>
-              <el-button type="primary" size="small">修改</el-button>
-              <el-button type="danger" size="small">删除</el-button>
+              <el-button type="primary" size="small" @click="modifyArticle(scope.row)">修改</el-button>
+              <el-button type="danger" size="small" @click="deleteArticle(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -54,18 +55,44 @@
     </el-tabs>
 
     <!-- 新增文章 -->
-    <el-dialog :visible.sync="dialog.newArticle" title="新增要闻" width="800px" center>
-      <Article :openType="'view'"></Article>
+    <el-dialog
+      v-if="dialog.newArticle"
+      :visible.sync="dialog.newArticle"
+      title="新增公开课"
+      width="800px"
+      center
+    >
+      <Article :openType="'new'" :artData="articleData" @success="success"></Article>
+    </el-dialog>
+    <!-- 修改文章 -->
+    <el-dialog
+      v-if="dialog.modifyArticle"
+      :visible.sync="dialog.modifyArticle"
+      title="修改公开课"
+      width="800px"
+      center
+    >
+      <Article :openType="'modify'" :artData="articleData" @success="success"></Article>
     </el-dialog>
     <!-- 查看文章 -->
-    <el-dialog :visible.sync="dialog.viewArticle" :title="articleData.title" width="800px" center>
-      <Article :openType="'view'" :artData="articleData"></Article>
+    <el-dialog
+      v-if="dialog.viewArticle"
+      :visible.sync="dialog.viewArticle"
+      :title="articleData.title"
+      width="800px"
+      center
+    >
+      <Article :openType="'view'" :artData="articleData" @success="success"></Article>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { findArticleByClassId, findClassById } from "@/api/article";
+import {
+  findArticleByClassId,
+  findClassById,
+  deleteArticleById
+} from "@/api/article";
 import { parseTime } from "@/utils";
 import Article from "@/components/Article";
 export default {
@@ -82,6 +109,7 @@ export default {
         modifyArticle: false,
         viewArticle: false
       },
+      tabIndex: 0,
       classList: [],
       articleData: {},
       data: [],
@@ -97,7 +125,56 @@ export default {
   },
   mounted() {},
   methods: {
+    success() {
+      this.dialog.newArticle = false;
+      this.dialog.modifyArticle = false;
+      this.dialog.viewArticle = false;
+      this.refreshData(this.classList[this.tabIndex].id);
+    },
+    // 新建文章
+    newArticle() {
+      this.articleData = {
+        uid: this.classList[this.tabIndex].id,
+        title: "",
+        abstract: "",
+        content: "",
+        imgUrl: "",
+        author: "",
+        videoUrl: "",
+        isShowTime: 1
+      };
+      this.dialog.newArticle = true;
+    },
+    // 修改文章
+    modifyArticle(row) {
+      this.articleData = row;
+      this.dialog.modifyArticle = true;
+    },
+    // 删除文章
+    deleteArticle(row) {
+      const id = row.id;
+      this.$confirm("您确定删除这篇文章吗？", "提示", {
+        type: "warning"
+      })
+        .then(() => {
+          deleteArticleById({ id })
+            .then(res => {
+              this.$message.success("删除成功");
+              this.refreshData(this.classList[this.tabIndex].id);
+            })
+            .catch(() => {
+              this.$message.success("删除失败");
+            });
+        })
+        .catch(() => {});
+    },
+    // 查看文章
+    viewArticle(row) {
+      this.articleData = row;
+      this.dialog.viewArticle = true;
+    },
     tabChange(val) {
+      this.tabIndex = val.index;
       this.refreshData(this.classList[val.index].id);
     },
     getClassList() {
@@ -115,11 +192,6 @@ export default {
     handleCurrentChange(val) {
       this.page = val;
       this.refreshData();
-    },
-    // 查看文章
-    viewArticle(row) {
-      this.articleData = row;
-      this.dialog.viewArticle = true;
     },
     refreshData(id) {
       this.loading = true;

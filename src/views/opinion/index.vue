@@ -1,6 +1,6 @@
 <template>
-  <div class="app-container">
-    <el-button type="primary" size="small">新增动态</el-button>
+  <div class="app-container">暂无内容
+    <!-- <el-button type="primary" size="small">新增动态</el-button>
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -39,7 +39,7 @@
           <el-button type="danger" size="small">删除</el-button>
         </template>
       </el-table-column>
-    </el-table>
+    </el-table>-->
   </div>
 </template>
 

@@ -6,3 +6,11 @@ export function getBannerList() {
     method: 'get'
   })
 }
+
+export function modifyBannerById(data) {
+  return request({
+    url: '/user/modifyBannerById',
+    method: 'post',
+    data
+  })
+}

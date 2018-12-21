@@ -67,7 +67,7 @@ export default {
   watch: {
     value: {
       handler: function(val) {
-        if (this.hasInit) {
+        if (!this.hasChange && this.hasInit) {
           this.$nextTick(() => {
             window.tinymce.get(this.tinymceId).setContent(val || "");
           });

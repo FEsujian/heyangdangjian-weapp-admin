@@ -132,27 +132,27 @@ export const constantRouterMap = [{
         }
       },
       {
-        path: 'menu1-1',
-        component: () => import('@/views/nested/menu1/menu1-1'),
-        name: 'Menu1-1',
+        path: 'openClass',
+        component: () => import('@/views/openClass/index'),
+        name: 'openClass',
         meta: {
           title: '公开课',
           icon: 'gongkaike'
         }
       },
       {
-        path: 'menu1-2',
-        component: () => import('@/views/nested/menu1/menu1-2'),
-        name: 'Menu1-2',
+        path: 'exam',
+        component: () => import('@/views/exam/index'),
+        name: 'exam',
         meta: {
           title: '在线考试',
           icon: 'zaixiankaoshi'
         }
       },
       {
-        path: 'menu1-3',
-        component: () => import('@/views/nested/menu1/menu1-3'),
-        name: 'Menu1-3',
+        path: 'experience',
+        component: () => import('@/views/experience/index'),
+        name: 'experience',
         meta: {
           title: '心得体会',
           icon: 'xindetihui'

@@ -10,7 +10,7 @@
         <div slot="button-next" class="swiper-button-next"></div>
       </swiper>
     </div>
-    <el-button type="primary" size="small" style="margin:10px 5px 10px;float:right;">新增轮播图</el-button>
+    <!-- <el-button type="primary" size="small" style="margin:10px 5px 10px;float:right;">新增轮播图</el-button> -->
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -24,17 +24,25 @@
       <el-table-column label="图片链接" prop="imgUrl"></el-table-column>
       <el-table-column fixed="right" label="操作" width="100" align="center">
         <template slot-scope="scope">
-          <el-button type="danger" size="small">删除</el-button>
+          <el-button type="success" size="small" @click="modifyBanner(scope.row)">修改</el-button>
         </template>
       </el-table-column>
     </el-table>
+
+    <el-dialog :visible.sync="dialog.modifyBanner" title="修改轮播图地址" width="500px" center>
+      <el-input v-model="modifyData.imgUrl"></el-input>
+      <div style="margin-top:20px;text-align:center">
+        <el-button @click="dialog.modifyBanner=false">取消</el-button>
+        <el-button type="primary" @click="confirm">确定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
-import { getBannerList } from "@/api/banner";
+import { getBannerList, modifyBannerById } from "@/api/banner";
 
 export default {
   components: { swiper, swiperSlide },
@@ -50,6 +58,10 @@ export default {
   },
   data() {
     return {
+      modifyData: {},
+      dialog: {
+        modifyBanner: false
+      },
       swiperOption: {
         spaceBetween: 30,
         centeredSlides: true,
@@ -72,12 +84,31 @@ export default {
     };
   },
   created() {
-    getBannerList().then(res => {
-      this.list = res.data;
-    });
+    this.refreshData();
   },
   mounted() {},
-  methods: {}
+  methods: {
+    refreshData() {
+      getBannerList().then(res => {
+        this.list = res.data;
+      });
+    },
+    confirm() {
+      modifyBannerById(this.modifyData)
+        .then(res => {
+          this.$message.success("修改成功");
+          this.dialog.modifyBanner = false;
+          this.refreshData();
+        })
+        .catch(() => {
+          this.$message.error("修改失败");
+        });
+    },
+    modifyBanner(row) {
+      this.modifyData = Object.assign({}, row);
+      this.dialog.modifyBanner = true;
+    }
+  }
 };
 </script>
 

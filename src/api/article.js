@@ -31,3 +31,27 @@ export function updateArticleById(data) {
     data
   })
 }
+
+export function newArticle(data) {
+  return request({
+    url: '/newArticle',
+    method: 'post',
+    data
+  })
+}
+
+export function findAllExperience(params) {
+  return request({
+    url: '/experience/findAllExperience',
+    method: 'get',
+    params
+  })
+}
+
+export function deleteArticleById(data) {
+  return request({
+    url: '/deleteArticleById',
+    method: 'post',
+    data
+  })
+}

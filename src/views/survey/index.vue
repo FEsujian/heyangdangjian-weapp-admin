@@ -28,7 +28,7 @@ export default {
       });
     },
     updateArticleById() {
-      updateArticleById({ data: this.data, id: 2 }).then(res => {
+      updateArticleById(this.data).then(res => {
         this.$message.success("保存成功");
         this.refreshData();
       });

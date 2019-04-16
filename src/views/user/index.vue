@@ -18,11 +18,11 @@
           <img :src="scope.row.avatarUrl" class="avatar">
         </template>
       </el-table-column>
-      <el-table-column label="自定义头像" width="100" align="center">
+      <!-- <el-table-column label="自定义头像" width="100" align="center">
         <template slot-scope="scope">
           <img v-if="scope.row.customAvatar" :src="scope.row.customAvatar" class="avatar">
         </template>
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column align="center" label="创建时间" width="200">
         <template slot-scope="scope">
           <span>{{ scope.row.createTime | parseTime }}</span>

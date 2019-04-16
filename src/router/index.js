@@ -104,18 +104,19 @@ export const constantRouterMap = [{
         }
       },
       {
-        path: 'partyActivity',
-        name: 'partyActivity',
-        component: () => import('@/views/partyActivity/index'),
+        path: 'partyVideo',
+        name: 'partyVideo',
+        component: () => import('@/views/partyVideo/index'),
         meta: {
-          title: '党建活动',
-          icon: 'huodong'
+          title: '党建视频',
+          icon: 'shipin'
         }
       }
     ]
   },
   {
     path: '/studySpace',
+    redirect: '/studySpace',
     component: Layout,
     name: 'studySpace',
     meta: {
@@ -153,6 +154,7 @@ export const constantRouterMap = [{
         path: 'experience',
         component: () => import('@/views/experience/index'),
         name: 'experience',
+        hidden: true,
         meta: {
           title: '心得体会',
           icon: 'xindetihui'
@@ -163,7 +165,7 @@ export const constantRouterMap = [{
   {
     path: '/systemSetting',
     component: Layout,
-    redirect: '/systemSetting/menu1',
+    redirect: '/systemSetting',
     name: 'systemSetting',
     meta: {
       title: '系统设置',

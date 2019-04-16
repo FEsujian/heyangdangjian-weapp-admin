@@ -1,7 +1,13 @@
 <template>
   <div class="app-container">
     <div style="width:400px;">
-      <el-form :model="passForm" status-icon label-width="100px" class="demo-ruleForm">
+      <el-form
+        ref="passForm"
+        :model="passForm"
+        status-icon
+        label-width="100px"
+        class="demo-ruleForm"
+      >
         <el-form-item label="原密码" prop="oldPass">
           <el-input v-model="passForm.oldPass" type="password" autocomplete="off"></el-input>
         </el-form-item>
@@ -34,7 +40,13 @@ export default {
   },
   created() {},
   mounted() {},
-  methods: {}
+  methods: {
+    // 重置密码
+    resetForm() {
+      const form = this.$refs["passForm"];
+      form.resetFields();
+    }
+  }
 };
 </script>
 

@@ -78,10 +78,15 @@
       v-if="dialog.viewArticle"
       :visible.sync="dialog.viewArticle"
       :title="articleData.title"
-      width="800px"
+      :show-close="false"
+      width="700px"
+      top="5vh"
       center
     >
-      <Article :openType="'view'" :artData="articleData" @success="success"></Article>
+      <div style="width:650px;max-height:600px;overflow:auto;" v-html="articleData.content"></div>
+      <div style="text-align:center">
+        <el-button type="primary" style="margin-top:20px;" @click="dialog.viewArticle=false">关闭</el-button>
+      </div>
     </el-dialog>
   </div>
 </template>
@@ -120,7 +125,7 @@ export default {
   },
   created() {
     this.getClassList();
-    this.refreshData(10);
+    this.refreshData(13);
   },
   mounted() {},
   methods: {
